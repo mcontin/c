@@ -21,6 +21,7 @@ void quick_sort_asc(float values[], int size) {
     swapper = values[pivotIndex];
     values[pivotIndex] = values[indexToSwap - 1];
     values[indexToSwap - 1] = swapper;
+    pivotIndex = indexToSwap - 1;
 
     // left side
     quick_sort_asc(values, pivotIndex);
@@ -49,6 +50,7 @@ void quick_sort_desc(float values[], int size) {
     swapper = values[pivotIndex];
     values[pivotIndex] = values[indexToSwap - 1];
     values[indexToSwap - 1] = swapper;
+    pivotIndex = indexToSwap - 1;
 
     // left side
     quick_sort_desc(values, pivotIndex);
@@ -60,7 +62,7 @@ void quick_sort_desc(float values[], int size) {
 //Dato il seguente array { 35.4, 46.7, 77.55, 11.1, 9.04, 0.75 } di elementi di tipo float,
 //eseguire l’ordinamento crescente e decrescente, stamparne il risultato a video
 void main() {
-    float values[] = {35.4, 46.7, 77.55, 11.1, 9.04, 0.75, 32.1, 64.7, 12.6, 75.1, 765.24, 0.432};
+    float values[] = {35.4, 46.7, 77.55, 11.1, 9.04, 0.75};
     int size = sizeof(values)/sizeof(values[0]);
 
     quick_sort_asc(values, size);

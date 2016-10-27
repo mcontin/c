@@ -1,7 +1,7 @@
 #include <stdio.h>
 
-//Esercizio 8
-//Dato il seguente array { 35.4, 46.7, 77.55, 11.1, 9.04, 0.75 } di elementi di tipo float, indicare il maggiore,
+// Esercizio 8
+// Dato il seguente array { 35.4, 46.7, 77.55, 11.1, 9.04, 0.75 } di elementi di tipo float, indicare il maggiore,
 // il minore e il valore medio, stamparne il risultato a video
 void main() {
     float values[] = {35.4, 46.7, 77.55, 11.1, 9.04, 0.75};
