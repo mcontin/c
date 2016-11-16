@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <mem.h>
+#include <time.h>
 
 int amount;
 
@@ -84,6 +85,7 @@ int deposit() {
 typedef struct movement {
     char type[9]; // 0 = prelievo, 1 = deposito
     int amount;
+    struct tm *date;
     struct movement * next;
 } movement_t;
 
@@ -93,6 +95,10 @@ void recordMovement(movement_t ** head, char * type, int amount) {
         strncpy((*head)->type, type, 9);
         (*head)->amount = amount;
         (*head)->next = NULL;
+
+        time_t rawTime;
+        time(&rawTime);
+        (*head)->date = localtime(&rawTime);
     } else {
         movement_t * current = *head;
 
@@ -104,6 +110,10 @@ void recordMovement(movement_t ** head, char * type, int amount) {
         strncpy(current->next->type, type, 9);
         current->next->amount = amount;
         current->next->next = NULL;
+
+        time_t rawTime;
+        time(&rawTime);
+        current->next->date = localtime(&rawTime);
     }
 }
 
@@ -113,7 +123,7 @@ void printHistory(movement_t * head) {
     printf("-- Movimenti --\n");
 
     while (current != NULL) {
-        printf("%s di %d euro.", current->type, current->amount);
+        printf("%s:\n %s di %d euro.", asctime(current->date), current->type, current->amount);
         current = current->next;
     }
 }
