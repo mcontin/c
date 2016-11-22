@@ -123,9 +123,31 @@ void printHistory(movement_t * head) {
     printf("-- Movimenti --\n");
 
     while (current != NULL) {
-        printf("%s:\n %s di %d euro.", asctime(current->date), current->type, current->amount);
+        printf("%s: %s di %d euro.\n", asctime(current->date), current->type, current->amount);
         current = current->next;
     }
+}
+
+void printHistoryToFile(movement_t * head) {
+    movement_t * current = head;
+
+    FILE *file = fopen("movimenti.txt", "w");
+    if (file == NULL) {
+        printf("Error opening file!\n");
+        return;
+    }
+
+    printf("Stampa in corso su file.\n");
+
+    while(current != NULL) {
+        // print to file
+        fprintf(file, "%s di %d euro.\n", current->type, current->amount);
+        current = current->next;
+    }
+
+    fclose(file);
+
+    printf("Stampa completata.");
 }
 
 void main() {
@@ -156,6 +178,9 @@ void main() {
                 break;
             case 3:
                 printHistory(head);
+                break;
+            case 4:
+                printHistoryToFile(head);
                 break;
             default:
                 printWrongInput();
